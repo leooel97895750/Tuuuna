@@ -1,0 +1,96 @@
+#content{
+    padding: 0px;
+    margin: 0px;
+    position: absolute;
+    background-color: black;
+    color: white;
+    height: 100%;
+    width: 100%;
+}
+#content-title
+{
+    margin: 10px 0px;
+}
+#tool-box
+{
+    position: sticky;
+    top: 0px;
+    background-color: black;
+}
+#tool-post
+{
+    width: fit-content;
+    padding:5px;
+    margin:5px;
+    border: white 1px solid;
+    color: #68e29f;
+    border-radius:4px;
+    -webkit-border-radius: 4px;
+}
+#tool-post:hover{
+    background-color: #4cc381;
+    color: black;
+}
+#tool-about
+{
+    width: fit-content;
+    padding:5px;
+    margin:5px;
+    border: white 1px solid;
+    color: white;
+    border-radius:4px;
+    -webkit-border-radius: 4px;
+}
+#tool-about:hover{
+    background-color: white;
+    color: black;
+}
+#content-list
+{
+    padding: 0px;
+    list-style-type: none;
+}
+#content-list li
+{
+    padding:15px;
+    border-top: 1px white solid;
+}
+#content-list li:hover
+{
+    background-color: white;
+    color: black;
+}
+#richtext-box
+{
+    display: none;
+}
+#post-button
+{
+    float: right;
+    width: fit-content;
+    padding:5px;
+    margin:5px;
+    border: white 1px solid;
+    color: #68e29f;
+    border-radius:4px;
+    -webkit-border-radius: 4px;
+}
+#post-button:hover{
+    background-color: #4cc381;
+    color: black;
+}
+#giveup-button
+{
+    float: right;
+    width: fit-content;
+    padding:5px;
+    margin:5px;
+    border: white 1px solid;
+    color: white;
+    border-radius:4px;
+    -webkit-border-radius: 4px;
+}
+#giveup-button:hover{
+    background-color: white;
+    color: black;
+}

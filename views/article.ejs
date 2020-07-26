@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Tuuuna</title>
+        <meta name="description" content="自由的言論平台">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="/images/fish.png">
+        <link rel="stylesheet" type="text/css" href="/stylesheets/login.css">
+        <link rel="stylesheet" type="text/css" href="/stylesheets/croppie.css">
+        <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="/javascripts/api.js"></script>
+        <script src="/javascripts/cookie.js"></script>
+        <script src="/javascripts/sha.js"></script>
+        <script src="/javascripts/login.js"></script>
+        <script src="/javascripts/imgur.js"></script>
+        <script src="/javascripts/croppie.min.js"></script>
+        <script src="/javascripts/content.js"></script>
+        <script src="/javascripts/richtext.js"></script>
+        <script>
+            window.onload = function() {
+                getBoardTitle();
+                getmemberData();
+                getArticle();
+            };
+        </script>
+    </head>
+
+   <body>
+        <!--使用者頭像-->
+        <img id="login" style="z-index: 12;" onclick="pressLogin()" src="/images/member.png">
+        <!--登入頁面-->
+        <div id="login-box" style="z-index: 11;" onkeypress="if (event.keyCode == 13) {login();}">
+            <div style="text-align: center; font-size:38px; font-weight:bold; margin:10px;">Tuuuna</div>
+            <div style="text-align: center; font-size:20px; margin-bottom:10px;">登入</div>
+            <input id="myaccount" class="mylogin" style="margin:10px;" type="text" placeholder="帳號(信箱)"><br>
+            <input id="mypassword" class="mylogin" style="margin:10px; margin-top:0px;" type="password" placeholder="密碼"><br>
+            <span id="signup-button" onclick="toSignup()">註冊</span>
+            <span id="login-button" onclick="login()">Enter</span>
+        </div>
+        <!--註冊頁面-->
+        <div id="signup-box" style="z-index: 11;" onkeypress="if (event.keyCode == 13) {register();}">
+            <div style="text-align: center; font-size:38px; font-weight:bold; margin:10px;">Tuuuna</div>
+            <div style="text-align: center; font-size:20px; margin-bottom:10px;">註冊</div>
+            <div style="margin-left:35px;">1.輸入信箱</div>
+            <input id="newmail" class="mylogin" style="margin:10px;margin-top:2px;" type="text" placeholder="有效gmail信箱"><br>
+            <div style="margin-left:35px;">2.輸入密碼</div>
+            <input id="newpassword" class="mylogin" style="margin:10px; margin-top:2px;" type="password" placeholder="英數字6位以上"><br>
+            <div style="margin-left:35px;">3.確認密碼</div>
+            <input id="againpassword" class="mylogin" style="margin:10px; margin-top:2px;" type="password" placeholder="英數字6位以上"><br>
+            <div style="margin-left:35px;">4.輸入暱稱</div>
+            <input id="newname" class="mylogin" style="margin:10px;margin-top:2px;" type="text" placeholder="別人看到的你的名稱"><br>
+            <span id="signup-button" onclick="toLogin()">返回登入</span>
+            <span id="login-button" onclick="register()">Register</span>
+        </div>
+        <!--帳戶資料頁面-->
+        <div id="member-box" style="z-index: 11;">
+            <h2 id="member-name"></h2>
+            <p id="member-mail"></p>
+            <hr>
+            <ul>
+                <li onclick="uploadMemberImg()"><img src="/images/uploadimg.png" title="uploadimg" style="position:relative;top:6px;height:22px;width:22px;opacity: 0.7;"> 頭貼上傳</li>
+                <div id="uploadimg-box">
+                    <input id="uploadimg-input" type="file">
+                    <div id="uploadimg-button" onclick="uploadCutImg('uploadimg-input', '200', '200'), uploadMemberImg()">上傳</div>
+                </div>
+                <li><img src="/images/history.png" title="history" style="position:relative;top:6px;height:22px;width:22px;opacity: 0.7;"> 瀏覽紀錄</li>
+                <li><img src="/images/setting.png" title="setting" style="position:relative;top:6px;height:22px;width:22px;opacity: 0.7;"> 設定</li>
+                <li><img src="/images/question.png" title="question" style="position:relative;top:6px;height:22px;width:22px;opacity: 0.7;"> 說明</li>
+                <li><img src="/images/information.png" title="information" style="position:relative;top:6px;height:22px;width:22px;opacity: 0.7;"> 意見提供</li>
+                <li onclick="logout()"><img src="/images/logout.png" title="logout" style="position:relative;top:6px;height:22px;width:22px;opacity: 0.7;"> 登出</li>
+            </ul>
+        </div>
+        <!--圖片切割-->
+        <div id="img-cut" style="z-index: 13;">
+            <div id="img-cut-view"></div>
+            <div id="uploadimg-cut" style="z-index: 14">確認上傳</div>
+        </div>
+        <!--暗屏遮罩-->
+        <div id="dark-mask" style="z-index: 10;"></div>
+        <!--內容-->
+        <div id="content" boardcid=<%= boardcid %> articlecid=<%= articlecid %> style="z-index: 9;">
+            <!-- 目錄位置 -->
+            <h1 id="content-title" onclick="window.location='https://www.tuuuna.com/board/<%= boardcid %>'">Tuuuna 討論區</h1>
+            <div class="tool-box">
+                <input type="text" placeholder="留言樓層">
+                <img src="/images/find.png" style="position:relative;top:10px;left:5px;height:30px;width:30px;">
+            </div>
+            <hr>
+            <div>
+                <h1 id="article-title"></h1>
+                <p id="article-author"></p>
+                <p id="article-content" style="font-size: 16px;"></p>
+            </div>
+            <hr>
+            <!-- 內容列表 -->
+            <div id="message-box">
+                <ul id="message-list">
+
+                </ul>
+            </div>
+        </div> 
+
+    </body>
+</html>

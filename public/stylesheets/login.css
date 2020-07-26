@@ -1,0 +1,171 @@
+html {
+  margin:0;
+  padding:0;
+  height:100vh;
+}
+body {
+  font: 14px 'SimSun', 'STSong', Arial, sans-serif;
+  padding:0px;
+  margin:0px;
+  background-color: black;
+}
+a {
+  text-decoration:none;
+}
+input {
+  padding:5px 10px; 
+  background: #f1f1f1; 
+  border: none;
+  cursor: text;
+  -webkit-border-radius: 5px;
+  border-radius: 5px; 
+}
+#dark-mask {
+  display: none;
+  background-color: black;
+  opacity: 0.5;
+  position: fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  margin:0px;
+}
+::-webkit-scrollbar
+{
+  width:6px;
+  height:6px;
+  background-color:#FDFDF5;
+}
+
+::-webkit-scrollbar-thumb
+{
+  background-color: lightgray;
+}
+#login {
+  position: fixed;
+  right: 10px;
+  top: 10px;
+  height: 50px;
+  width: 50px;
+  border-radius:50%;
+  -webkit-border-radius: 50%;
+}
+#login-box {
+  position: fixed;
+  display: none;
+  top: 30%;
+  left: 50%;
+  width: 300px;
+  margin-left: -150px;
+  background-color: #4cc381;
+  border-radius:4px;
+  -webkit-border-radius: 4px;
+}
+
+.mylogin {
+  position: relative;
+  width: 200px;
+  left: 25px;
+}
+
+#login-button {
+  float: right;
+  padding: 5px;
+  font-size: 20px;
+  background-color: white;
+  cursor:pointer;
+  border-radius:4px;
+  -webkit-border-radius: 4px;
+  margin-right: 35px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+#login-button:hover {
+  background-color: green;
+}
+#signup-button {
+  float: left;
+  margin-top: 10px;
+  margin-left: 35px;
+  cursor:pointer;
+}
+#signup-button:hover {
+  color: green;
+  font-weight: bold;
+}
+#signup-box {
+  position: fixed;
+  display: none;
+  top: 10%;
+  left: 50%;
+  width: 300px;
+  margin-left: -150px;
+  background-color: #4cc381;
+  border-radius:4px;
+  -webkit-border-radius: 4px;
+}
+#member-box {
+  position: fixed;
+  display: none;
+  top: 0px;
+  right: 0px;
+  width: 250px;
+  padding-left: 15px;
+  background-color: white;
+  border-radius:5px;
+  -webkit-border-radius: 5px;
+}
+#member-box ul{
+  list-style-type: none;
+  padding: 0px;
+}
+#member-box ul li{
+  margin: 10px;
+  padding:5px;
+}
+#member-box ul li:hover{
+  color:white;
+  background-color: #4cc381;
+}
+#uploadimg-box{
+  display: none;
+}
+#uploadimg-button{
+  background-color: #4cc381;
+  color: white;
+  width: fit-content;
+  margin: 5px;
+  margin-left: 7%;
+  padding: 5px;
+  border-radius:5px;
+  -webkit-border-radius: 5px;
+}
+#uploadimg-button:hover{
+  background-color: #1c9351;
+  color: white;
+}
+#img-cut
+{
+  display: none;
+  position: absolute;
+  left: 15px;
+}
+#uploadimg-cut
+{
+  position: absolute;
+  bottom: 20px;
+  right: 0px;
+  background-color: #4cc381;
+  color: white;
+  width: fit-content;
+  margin: 5px;
+  padding: 5px;
+  border-radius:5px;
+  -webkit-border-radius: 5px;
+}
+#uploadimg-cut:hover{
+  background-color: #1c9351;
+  color: white;
+}
