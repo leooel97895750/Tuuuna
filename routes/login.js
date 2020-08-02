@@ -22,30 +22,25 @@ const limiter = rateLimit({
 //傳入mailhash, pwdhash，登入帳號，回傳jwt
 router.get('/api/login', limiter, function(req, res, next) {
 
+    let p1 = req.query.mailhash;
+    let p2 = req.query.pwdhash;
+
     pool.getConnection(function(err, connection){
         if(err){console.log(err); res.send('sql error');}
-        //api參數regex檢查
-        const p1 = req.query.mailhash;
-        const p2 = req.query.pwdhash;
-        if(sqlregex.test(p1) == false && sqlregex.test(p2) == false)
-        {
-            querystr = "select CID, MID from `member` where Mail_hash='"+p1+"' and Pwd='"+p2+"'";
-            connection.query(querystr, function(err, result){
-                if(err){console.log(err); res.send('sql error');}
-                if(result[0] == undefined) res.send('login fail');
-                else
-                {
-                    const token = jwt.sign({'mycid': result[0].CID, 'mymid': result[0].MID}, secret, { expiresIn: '1 day' });
-                    res.send(token);
-                }
-                connection.release();
-            })
-        }
-        else
-        {
-            res.send('sqlregex fail');
-            console.log('login: sqlregex fail');
-        } 
+        
+        
+        let myparams = [p1, p2];
+        let querystr = "select CID, MID from `member` where Mail_hash=? and Pwd=?";
+        connection.query(querystr, myparams, function(err, result){
+            if(err){console.log(err); res.send('sql error');}
+            if(result[0] == undefined) res.send('login fail');
+            else
+            {
+                const token = jwt.sign({'mycid': result[0].CID, 'mymid': result[0].MID}, secret, { expiresIn: '7 day' });
+                res.send(token);
+            }
+            connection.release();
+        })
     });
 });
 

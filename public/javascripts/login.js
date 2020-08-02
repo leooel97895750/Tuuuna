@@ -123,11 +123,14 @@ function getmemberData()
         else if(xhttp.responseText == 'sqlregex fail') {alert('資料包含特殊字元');}
         else
         {
+            islogin = 1;
             let getmember_json = JSON.parse(xhttp.responseText);
             $("#member-name").text(getmember_json[0].Name);
             $("#member-mail").text(getmember_json[0].Mail);
-            $("#login").attr('src', getmember_json[0].Img);
-            islogin = 1;
+            if(getmember_json[0].Img != null) 
+            {
+                $("#login").attr('src', getmember_json[0].Img);
+            }
         }
     }, getCookieByName('token'));
 }

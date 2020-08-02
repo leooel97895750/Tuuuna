@@ -20,6 +20,7 @@
         <script src="/javascripts/croppie.min.js"></script>
         <script src="/javascripts/content.js"></script>
         <script src="/javascripts/richtext.js"></script>
+        <script src="/javascripts/css.js"></script>
         <script>
             window.onload = function() {
                 getBoardTitle();
@@ -84,22 +85,27 @@
         <div id="dark-mask" style="z-index: 10;"></div>
         <!--內容-->
         <div id="content" boardcid=<%= boardcid %> style="z-index: 9;">
-            <!-- 目錄位置 -->
-            <h1 id="content-title" onclick="window.location='https://www.tuuuna.com'">Tuuuna 討論區</h1>
-            <!-- 工具欄 -->
-            <div id="tool-box">
-                <input type="text" placeholder="文章關鍵字">
-                <img src="/images/find.png" style="position:relative;top:10px;left:5px;height:30px;width:30px;">
-                <span id="tool-post" onclick="openEditor()">發文</span>
-                <span id="tool-about">關於</span>
-            </div>
+            <header>
+                <!-- 目錄位置 -->
+                <h2 id="content-title" onclick="window.location='https://www.tuuuna.com'">Tuuuna 討論區</h2>
+                <!-- 工具欄 -->
+                <div id="tool-box">
+                    <input type="text" placeholder="文章關鍵字" style="position: relative; bottom: 15px;">
+                    <img id="find" src="/images/find.png" onmouseover="find_g()" onmouseout="find_w()" style="position:relative;left:5px;bottom:2px;height:30px;width:30px;margin-right:10px;">
+                    <div style="display: inline-block;">
+                        <div id="tool-post" onclick="openEditor()">發文</div>
+                        <!-- <div id="tool-about">關於</div> -->
+                    </div>   
+                </div>
+            </header>
+            
             <!-- 文字編輯器 -->
             <div id="richtext-box">
                 <br>
-                <input id="richtext-title" type="text" placeholder="標題" style="width:calc(100% - 22px); background: black;color:white;border: white 1px solid;-webkit-border-radius: 0px;border-radius: 0px; ">
+                <input id="richtext-title" type="text" placeholder="標題" style="width:calc(100% - 22px); background: black;color:lightgray;border: lightgray 1px solid;-webkit-border-radius: 0px;border-radius: 0px; ">
                 <br><br>
-                <div id="editor"></div>
-                <div id="toolbar"></div>
+                <div id="editor"></div><br>
+                
                 <div onclick="getContent()" id="post-button">發布</div>
                 <div onclick="openEditor()" id="giveup-button">放棄</div>
             </div>

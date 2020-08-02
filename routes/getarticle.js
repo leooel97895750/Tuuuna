@@ -9,29 +9,23 @@ let pool = mysql.createPool({
 });
 let express = require('express');
 let router = express.Router();
-const sqlregex = /[;-\s\n\b'/"!`#}!{$&})(=+*|]/;
 
-//輸入CID 輸出member table資料
+//輸入AID 輸出article table資料
 router.get('/api/getarticle', function(req, res, next) {
-    //參數驗證(避免sql injection)
-    let p1 = req.query.cid;
-    if(sqlregex.test(p1) == false)
-    {
-        pool.getConnection(function(err, connection){
+    //參數處理
+    let p1 = req.query.aid;
+    
+    pool.getConnection(function(err, connection){
+        if(err){console.log(err); res.send('sql error');}
+        let myparams = [Number(p1)];
+        let querystr = "select * from article where AID=?";
+        connection.query(querystr, myparams, function(err, result){
             if(err){console.log(err); res.send('sql error');}
-            querystr = "select * from article where AID="+p1;
-            connection.query(querystr, function(err, result){
-                if(err){console.log(err); res.send('sql error');}
-                res.send(result);
-                connection.release();
-            })
-        });
-    }
-    else
-    {
-        res.send('sqlregex fail');
-        console.log('getarticle: sqlregex fail');
-    } 
+            res.send(result);
+            connection.release();
+        })
+    });
+    
 });
 
 module.exports = router;

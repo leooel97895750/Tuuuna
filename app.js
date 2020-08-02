@@ -1,6 +1,6 @@
 let express = require('express');
 let path = require('path');
-let favicon = require('static-favicon');
+//let favicon = require('static-favicon');
 let logger = require('morgan');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
@@ -19,6 +19,9 @@ let getarticlelistRouter = require('./routes/getarticlelist');
 let getclassRouter = require('./routes/getclass');
 let getarticleRouter = require('./routes/getarticle');
 let insertarticleRouter = require('./routes/insertarticle');
+let insertmessageRouter = require('./routes/insertmessage');
+let getmessageRouter = require('./routes/getmessage');
+let insertboardRouter = require('./routes/insertboard');
 
 let app = express();
 app.use(helmet());
@@ -27,7 +30,7 @@ app.use(helmet());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(favicon());
+//app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
@@ -47,6 +50,9 @@ app.use('/', getarticlelistRouter);
 app.use('/', getclassRouter);
 app.use('/', getarticleRouter);
 app.use('/', insertarticleRouter);
+app.use('/', insertmessageRouter);
+app.use('/', getmessageRouter);
+app.use('/', insertboardRouter);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {

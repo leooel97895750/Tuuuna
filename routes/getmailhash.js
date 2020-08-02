@@ -9,29 +9,23 @@ let pool = mysql.createPool({
 });
 let express = require('express');
 let router = express.Router();
-const sqlregex = /[;-\s\n\b'/"!`#}!{$&})(=+*|]/;
 
 //傳入mail_hash，回傳查詢結果
 router.get('/api/getmailhash', function(req, res, next) {
 
     let p1 = req.query.mail_hash;
-    if(sqlregex.test(p1) == false)
-    {
-        pool.getConnection(function(err, connection){
+    
+    pool.getConnection(function(err, connection){
+        if(err){console.log(err); res.send('sql error');}
+        let myparams = [p1];
+        let querystr = "select Mail_hash from `member` where Mail_hash=?";
+        connection.query(querystr, myparams, function(err, result){
             if(err){console.log(err); res.send('sql error');}
-            querystr = "select Mail_hash from `member` where Mail_hash='"+p1+"'";
-            connection.query(querystr, function(err, result){
-                if(err){console.log(err); res.send('sql error');}
-                res.send(result);
-                connection.release();
-            })
-        });
-    }
-    else
-    {
-        res.send('sqlregex fail');
-        console.log('getmailhash: sqlregex fail');
-    } 
+            res.send(result);
+            connection.release();
+        })
+    });
+    
 });
 
 module.exports = router;

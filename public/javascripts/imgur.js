@@ -9,17 +9,17 @@ function uploadCutImg(htmlid, x, y)
     else
     {
         //console.log(fileUploader);
-        let $uploadCrop;
+        let uploadCrop;
         let reader = new FileReader(); 
         reader.readAsDataURL(fileUploader); 
         reader.onload = function (e) { 
-            $uploadCrop.croppie('bind', { 
+            uploadCrop.croppie('bind', { 
                 url: e.target.result 
             }); 
         }
         
         $("#img-cut").css("display", "block");
-        $uploadCrop = $('#img-cut-view').croppie({ 
+        uploadCrop = $('#img-cut-view').croppie({ 
             viewport: { 
                 width: mywidth, 
                 height: myheight
@@ -31,12 +31,13 @@ function uploadCutImg(htmlid, x, y)
             showZoomer: false
         }); 
         $('#uploadimg-cut').on('click', function (ev) {
-            $uploadCrop.croppie('result', {
+            uploadCrop.croppie('result', {
                 type: 'base64',
                 size: {width: mywidth, height: myheight},
                 format: 'jpeg'
             }).then(function (resp) {
                 $("#img-cut").css("display", "none");
+                $('#uploadimg-cut').off('click');
                 //console.log(resp);
                 let imgbase64 = resp.replace('data:image/jpeg;base64,', '');
         
@@ -61,6 +62,7 @@ function uploadCutImg(htmlid, x, y)
     
                 $.ajax(settings).done(function (response) {
                     let response_json = JSON.parse(response);
+                    uploadCrop.croppie('destroy');
                     let updatememberimg_url = "/api/updatememberimg?imgurl="+response_json.data.link+"&imgid="+response_json.data.id;
                     getAPI(updatememberimg_url, function(xhttp){
                         if(xhttp.responseText == 'authDenied') {alert('請重新登入');}

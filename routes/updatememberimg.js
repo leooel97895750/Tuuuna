@@ -12,7 +12,6 @@ let express = require('express');
 let router = express.Router();
 let jwt = require('jsonwebtoken');
 const secret = process.env.SECRET;
-const sqlregex = /[;-\s\n\b'"!`#}!{$&})(=+*|]/;
 
 //存入使用者頭像圖片id
 router.get('/api/updatememberimg', function(req, res, next) {
@@ -26,23 +25,17 @@ router.get('/api/updatememberimg', function(req, res, next) {
             let p1 = decoded.mymid;
             let p2 = req.query.imgurl;
             let p3 = req.query.imgid;
-            if(sqlregex.test(p1) == false && sqlregex.test(p2) == false && sqlregex.test(p3) == false)
-            {
-                pool.getConnection(function(err, connection){
+            
+            pool.getConnection(function(err, connection){
+                if(err){console.log(err); res.send('sql error');}
+                let myparams = [p2, p3, Number(p1)];
+                let querystr = "update `member` set Img = ?, Imgid = ? where MID=?";
+                connection.query(querystr, myparams, function(err, result){
                     if(err){console.log(err); res.send('sql error');}
-                    querystr = "update `member` set Img = '"+p2+"', Imgid = '"+p3+"' where MID="+p1;
-                    connection.query(querystr, function(err, result){
-                        if(err){console.log(err); res.send('sql error');}
-                        res.send(result);
-                        connection.release();
-                    })
-                });
-            }
-            else
-            {
-                res.send('sqlregex fail');
-                console.log('updatememberimg: sqlregex fail');
-            } 
+                    res.send(result);
+                    connection.release();
+                })
+            });
         }
     });
 });

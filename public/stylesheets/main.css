@@ -3,7 +3,7 @@
     margin: 0px;
     position: absolute;
     background-color: black;
-    color: white;
+    color: lightgray;
     height: 100%;
     width: 100%;
 }
@@ -19,10 +19,11 @@
 }
 #tool-post
 {
+    float: left;
     width: fit-content;
     padding:5px;
     margin:5px;
-    border: white 1px solid;
+    border: lightgray 1px solid;
     color: #68e29f;
     border-radius:4px;
     -webkit-border-radius: 4px;
@@ -31,18 +32,34 @@
     background-color: #4cc381;
     color: black;
 }
-#tool-about
+#tool-create
 {
+    float: left;
     width: fit-content;
     padding:5px;
     margin:5px;
-    border: white 1px solid;
-    color: white;
+    border: lightgray 1px solid;
+    color: #68e29f;
+    border-radius:4px;
+    -webkit-border-radius: 4px;
+}
+#tool-create:hover{
+    background-color: #4cc381;
+    color: black;
+}
+#tool-about
+{
+    float: left;
+    width: fit-content;
+    padding:5px;
+    margin:5px;
+    border: lightgray 1px solid;
+    color: lightgray;
     border-radius:4px;
     -webkit-border-radius: 4px;
 }
 #tool-about:hover{
-    background-color: white;
+    background-color: lightgray;
     color: black;
 }
 #content-list
@@ -53,24 +70,42 @@
 #content-list li
 {
     padding:15px;
-    border-top: 1px white solid;
+    border-top: 1px lightgray solid;
 }
 #content-list li:hover
 {
-    background-color: white;
+    background-color: lightgray;
     color: black;
 }
 #richtext-box
 {
     display: none;
 }
+#editor
+{
+    height: 400px;
+}
+.ql-toolbar .ql-stroke {
+    fill: none;
+    stroke: #a1a1a1 !important;
+}
+
+.ql-toolbar .ql-fill {
+    fill: #a1a1a1 !important;
+    stroke: none;
+}
+
+.ql-toolbar .ql-picker {
+    color: #a1a1a1 !important;
+}
 #post-button
 {
+    font-size: 20px;
     float: right;
     width: fit-content;
-    padding:5px;
+    padding:5px 10px;
     margin:5px;
-    border: white 1px solid;
+    border: lightgray 1px solid;
     color: #68e29f;
     border-radius:4px;
     -webkit-border-radius: 4px;
@@ -81,16 +116,32 @@
 }
 #giveup-button
 {
+    font-size: 20px;
     float: right;
     width: fit-content;
-    padding:5px;
+    padding:5px 10px;
     margin:5px;
-    border: white 1px solid;
-    color: white;
+    border: lightgray 1px solid;
+    color: lightgray;
     border-radius:4px;
     -webkit-border-radius: 4px;
 }
 #giveup-button:hover{
-    background-color: white;
+    background-color: lightgray;
     color: black;
 }
+#message-list
+{
+    padding: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+    list-style-type: none;
+}
+#message-tool-box
+{
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    background-color: black;
+}
+

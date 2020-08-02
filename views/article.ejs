@@ -18,11 +18,14 @@
         <script src="/javascripts/croppie.min.js"></script>
         <script src="/javascripts/content.js"></script>
         <script src="/javascripts/richtext.js"></script>
+        <script src="/javascripts/css.js"></script>
+        <script src="/javascripts/message.js"></script>
         <script>
             window.onload = function() {
                 getBoardTitle();
                 getmemberData();
                 getArticle();
+                getMessage();
             };
         </script>
     </head>
@@ -80,27 +83,29 @@
         <!--暗屏遮罩-->
         <div id="dark-mask" style="z-index: 10;"></div>
         <!--內容-->
-        <div id="content" boardcid=<%= boardcid %> articlecid=<%= articlecid %> style="z-index: 9;">
+        <div id="content" boardcid=<%= boardcid %> articleaid=<%= articleaid %> style="z-index: 9;">
             <!-- 目錄位置 -->
-            <h1 id="content-title" onclick="window.location='https://www.tuuuna.com/board/<%= boardcid %>'">Tuuuna 討論區</h1>
-            <div class="tool-box">
-                <input type="text" placeholder="留言樓層">
-                <img src="/images/find.png" style="position:relative;top:10px;left:5px;height:30px;width:30px;">
-            </div>
-            <hr>
-            <div>
-                <h1 id="article-title"></h1>
+            <h2 id="content-title" onclick="window.location='https://www.tuuuna.com/board/<%= boardcid %>'">Tuuuna 討論區</h2>
+            
+            <div style="border: lightgray 1px solid; padding-left:15px;padding-right:15px;">
+                <h1 id="article-title" style="color: #4cc381"></h1>
                 <p id="article-author"></p>
                 <p id="article-content" style="font-size: 16px;"></p>
             </div>
-            <hr>
+            
             <!-- 內容列表 -->
             <div id="message-box">
                 <ul id="message-list">
 
                 </ul>
             </div>
+            <!-- 留言工具欄 -->
+            <div id="message-tool-box">
+                <img id="picture" src="/images/picture.png" onmouseover="picture_g()" onmouseout="picture_w()" style="position:relative;top:6px;height:23px;width:23px;margin-right:10px;">
+                <input id="message-txt" type="text" onkeypress="if (event.keyCode == 13) {sendMessage();}" placeholder="留個言吧">
+                <img id="send" src="/images/send.png" onclick="sendMessage()" onmouseover="send_g()" onmouseout="send_w()" style="position:relative;top:8px;left:5px;height:22px;width:22px;">
+            </div>
         </div> 
-
+        
     </body>
 </html>

@@ -16,13 +16,13 @@ const limiter = rateLimit({
 router.get('/api/sendmail', limiter, function(req, res, next) {
 
     //api參數regex檢查
-    const p1 = req.query.gmail;
-    const p2 = req.query.mail_hash;
-    const p3 = req.query.pwd_hash;
-    const p4 = req.query.name;
+    let p1 = req.query.gmail;
+    let p2 = req.query.mail_hash;
+    let p3 = req.query.pwd_hash;
+    let p4 = req.query.name;
     if(sqlregex.test(p1) == false && sqlregex.test(p2) == false && sqlregex.test(p3) == false && sqlregex.test(p4) == false)
     {
-        const token = jwt.sign({'gmail': p1, 'mail_hash': p2, 'pwd_hash': p3, 'name': p4}, secret, { expiresIn: '3 min' });
+        const token = jwt.sign({'gmail': p1, 'mail_hash': p2, 'pwd_hash': p3, 'name': p4}, secret, { expiresIn: '10 min' });
         let transporter = nodemailer.createTransport({
             service: 'Gmail',
             secureConnection: true,
@@ -43,7 +43,7 @@ router.get('/api/sendmail', limiter, function(req, res, next) {
             //主旨
             subject: 'Tuuuna帳號驗證信',
             //嵌入 html 的內文
-            html: '<h2>感謝您註冊會員</h2><h3>點擊下方按鈕完成最後帳號開通驗證程序</h3><a href="https://www.tuuuna.com/api/insertaccount?token='+token+'">>>帳號開通<<</a><p>注意: 3分鐘後連結將失效</p>'
+            html: '<h2>感謝您註冊會員</h2><h3>點擊下方按鈕完成最後帳號開通驗證程序</h3><a href="https://www.tuuuna.com/api/insertaccount?token='+token+'">>>帳號開通<<</a><p>注意: 10分鐘後連結將失效</p>'
         };
         
         //發送信件方法

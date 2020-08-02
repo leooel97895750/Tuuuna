@@ -1,16 +1,17 @@
 //index.html專用函式
 function getBoard()
 {
-    let getclassboard_url = '/api/getclassboard?test=123';
+    let getclassboard_url = '/api/getclassboard';
     getAPI(getclassboard_url, function(xhttp){
         let getclassboard_json = JSON.parse(xhttp.responseText);
         console.log(getclassboard_json);
         //神一般的引號使用技術，小心觸碰
+        $("#content-list").empty();
         for(let i=getclassboard_json.length-1; i>=0; i--)
         {
             let eachBoard = $("<li onclick='"+'window.location="https://www.tuuuna.com/board/'+getclassboard_json[i].CID+'"'+";'>"+
                             "<span style='font-size:20px;'>"+getclassboard_json[i].CName+" "+
-                            getclassboard_json[i].CDes+
+                            "<span style='font-size:16px;margin-left:10px;'>"+((getclassboard_json[i].CDes == null) ? '' : getclassboard_json[i].CDes)+"</span>"+
                             "</span></li>");
             $("#content-list").prepend(eachBoard);
         }
@@ -25,10 +26,12 @@ function getBoardArticle()
         let getarticlelist_json = JSON.parse(xhttp.responseText);
         console.log(getarticlelist_json);
         //神一般的引號使用技術，小心觸碰
+        $("#content-list").empty();
         for(let i=getarticlelist_json.length-1; i>=0; i--)
         {
-            let eachBoard = $("<li onclick='"+'window.location="https://www.tuuuna.com/board/'+boardcid+'/article/'+getarticlelist_json[i].AID+'"'+";'>"+
-                            "<span style='font-size:20px;'>"+getarticlelist_json[i].Title+"</span><br>"+                
+            let eachBoard = $("<li style='padding:10px;' onclick='"+'window.location="https://www.tuuuna.com/board/'+boardcid+'/article/'+getarticlelist_json[i].AID+'"'+";'>"+
+                            "<span style='font-size:20px;'>"+getarticlelist_json[i].Title+"</span><br>"+    
+                            "<span style='color:yellow'>"+getarticlelist_json[i].Watch+"</span> "+            
                             getarticlelist_json[i].Message+" "+
                             getarticlelist_json[i].Good+" "+
                             getarticlelist_json[i].Bad+" "+
@@ -56,13 +59,35 @@ function getBoardTitle()
 //article.ejs專用函式，取得文章
 function getArticle()
 {
-    let articlecid = $("#content").attr("articlecid");
-    let getarticle_url = '/api/getarticle?cid='+articlecid;
+    let articleaid = $("#content").attr("articleaid");
+    let getarticle_url = '/api/getarticle?aid='+articleaid;
     getAPI(getarticle_url, function(xhttp){
         let getarticle_json = JSON.parse(xhttp.responseText);
         console.log(getarticle_json);
         $("#article-title").text(getarticle_json[0].Title);
         $("#article-author").text(getarticle_json[0].Author+" "+getarticle_json[0].Since.split('.')[0].replace('T', ' '));
         $("#article-content").html(getarticle_json[0].Txt);
+    });
+}
+
+//article.ejs專用函式，取得留言
+function getMessage()
+{
+    let articleaid = $("#content").attr("articleaid");
+    let getmessage_url = '/api/getmessage?aid='+articleaid;
+    getAPI(getmessage_url, function(xhttp){
+        let getmessage_json = JSON.parse(xhttp.responseText);
+        console.log(getmessage_json);
+        //神一般的引號使用技術，小心觸碰
+        $("#message-list").empty();
+        for(let i=getmessage_json.length-1; i>=0; i--)
+        {
+            let eachMessage = $("<li>"+
+                            "<span style='color:#eeee00;'>"+getmessage_json[i].Author+"</span>"+": "+
+                            getmessage_json[i].Txt+
+                            "<div style='float:right;'>"+getmessage_json[i].Since.split('.')[0].replace('T', ' ')+"</div>"+
+                            "</li>");
+            $("#message-list").prepend(eachMessage);
+        }
     });
 }

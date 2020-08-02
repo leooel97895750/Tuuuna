@@ -4,7 +4,7 @@ html {
   height:100vh;
 }
 body {
-  font: 14px 'SimSun', 'STSong', Arial, sans-serif;
+  font: 14px '微軟正黑體', 'STSong', Arial, sans-serif;
   padding:0px;
   margin:0px;
   background-color: black;
@@ -74,7 +74,7 @@ input {
   float: right;
   padding: 5px;
   font-size: 20px;
-  background-color: white;
+  background-color: #f1f1f1;
   cursor:pointer;
   border-radius:4px;
   -webkit-border-radius: 4px;
