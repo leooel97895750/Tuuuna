@@ -5,6 +5,7 @@ let logger = require('morgan');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
 let helmet = require('helmet');
+//let opay = require('opay_payment_nodejs');
 
 let articleRouter = require('./routes/article');
 let boardRouter = require('./routes/board');
@@ -22,6 +23,8 @@ let insertarticleRouter = require('./routes/insertarticle');
 let insertmessageRouter = require('./routes/insertmessage');
 let getmessageRouter = require('./routes/getmessage');
 let insertboardRouter = require('./routes/insertboard');
+let opayRouter = require('./routes/opay');
+let opayretuenRouter = require('./routes/opayreturn');
 
 let app = express();
 app.use(helmet());
@@ -36,6 +39,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+//app.use(opay);
 
 app.use('/', articleRouter);
 app.use('/', boardRouter);
@@ -53,6 +57,8 @@ app.use('/', insertarticleRouter);
 app.use('/', insertmessageRouter);
 app.use('/', getmessageRouter);
 app.use('/', insertboardRouter);
+app.use('/', opayRouter);
+app.use('/', opayretuenRouter);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {

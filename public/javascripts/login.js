@@ -71,7 +71,7 @@ function register()
                     getAPI(sendmail_url, function(xhttp){
                         if(xhttp.responseText == 'authDenied') {alert('請重新登入');islogin = 0;}
                         else if(xhttp.responseText == 'sqlregex fail') {alert('資料包含特殊字元');}
-                        else if(xhttp.responseText == 'mail fail') {alert('系統錯誤請稍後再試');}
+                        else if(xhttp.responseText == 'mail fail') {alert('寄信失敗請稍後再試');}
                     });  
                     $("#signup-box").slideUp();
                     $("#dark-mask").css('display', 'none');

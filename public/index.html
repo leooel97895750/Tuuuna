@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>Tuuuna</title>
-        <meta name="description" content="自由的言論平台">
+        <meta name="description" content="討論區">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" href="/images/fish.png">
         <link rel="stylesheet" type="text/css" href="/stylesheets/login.css">
@@ -20,6 +20,7 @@
         <script src="/javascripts/richtext.js"></script>
         <script src="/javascripts/css.js"></script>
         <script src="/javascripts/createboard.js"></script>
+        <script src="/javascripts/opay.js"></script>
         <script>
             window.onload = function() {
                 getBoard();
@@ -84,7 +85,7 @@
         <div id="content" style="z-index: 9;">
             <header>
                 <!-- 目錄位置 -->
-                <h2 id="content-title">Tuuuna 討論區</h2>
+                <h2 id="content-title" onclick="testopay()">Tuuuna 討論區</h2>
                 <!-- 工具欄 -->
                 <div id="tool-box">
                     <input type="text" placeholder="文章關鍵字" style="position: relative; bottom: 15px;">

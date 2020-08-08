@@ -14,7 +14,7 @@ function insertBoard()
     {
         let insertboard_url = "/api/insertboard?cname="+boardname+"&cdes="+boarddes;
         getAPI(insertboard_url, function(xhttp){
-            if(xhttp.responseText == 'authDenied') {islogin = 0;alert('登入才能留言喔');}
+            if(xhttp.responseText == 'authDenied') {islogin = 0;alert('登入才能創板喔');}
             else if(xhttp.responseText == 'sqlregex fail') {alert('資料包含特殊字元');}
             else
             {

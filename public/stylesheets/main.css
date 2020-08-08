@@ -85,18 +85,12 @@
 {
     height: 400px;
 }
-.ql-toolbar .ql-stroke {
-    fill: none;
-    stroke: #a1a1a1 !important;
-}
-
-.ql-toolbar .ql-fill {
-    fill: #a1a1a1 !important;
-    stroke: none;
-}
-
-.ql-toolbar .ql-picker {
-    color: #a1a1a1 !important;
+#image-size
+{
+    display: none;
+    position: fixed;
+    top:0px;
+    left:0px;
 }
 #post-button
 {
@@ -143,5 +137,50 @@
     bottom: 15px;
     right: 15px;
     background-color: black;
+}
+#image-size-upload
+{
+    font-size: 20px;
+    width: fit-content;
+    padding:5px 10px;
+    margin:5px;
+    border: lightgray 1px solid;
+    color: #68e29f;
+    border-radius:4px;
+    -webkit-border-radius: 4px;
+}
+#image-size-upload:hover{
+    background-color: #4cc381;
+    color: black;
+}
+#image-big
+{
+    font-size: 20px;
+    width: fit-content;
+    padding:5px 10px;
+    margin:5px;
+    border: lightgray 1px solid;
+    color: lightgray;
+    border-radius:4px;
+    -webkit-border-radius: 4px;
+}
+#image-big:hover{
+    background-color: lightgray;
+    color: black;
+}
+#image-small
+{
+    font-size: 20px;
+    width: fit-content;
+    padding:5px 10px;
+    margin:5px;
+    border: lightgray 1px solid;
+    color: lightgray;
+    border-radius:4px;
+    -webkit-border-radius: 4px;
+}
+#image-small:hover{
+    background-color: lightgray;
+    color: black;
 }
 
