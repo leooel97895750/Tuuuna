@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>Tuuuna</title>
-        <meta name="description" content="自由的言論平台">
+        <meta name="description" content="討論區">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" href="/images/fish.png">
         <link rel="stylesheet" type="text/css" href="/stylesheets/login.css">
@@ -20,6 +20,7 @@
         <script src="/javascripts/richtext.js"></script>
         <script src="/javascripts/css.js"></script>
         <script src="/javascripts/message.js"></script>
+        <script src="/javascripts/article.js"></script>
         <script>
             window.onload = function() {
                 getBoardTitle();
@@ -91,6 +92,10 @@
                 <h1 id="article-title" style="color: #4cc381"></h1>
                 <p id="article-author"></p>
                 <p id="article-content" style="font-size: 16px;"></p>
+                <br>
+                <img id="good-img" src="/images/good_green.png" onclick="articleGood()" onmouseover="good_w()" onmouseout="good_g()" style="width:20px; height:20px;"><span id="article-good" style="margin-left:5px;"></span>
+                <img id="bad-img" src="/images/bad_green.png" onclick="articleBad()" onmouseover="bad_w()" onmouseout="bad_g()" style="width:20px; height:20px;margin-left:15px;"><span id="article-bad" style="margin-left:5px;"></span>
+                <br><br>
             </div>
             
             <!-- 內容列表 -->

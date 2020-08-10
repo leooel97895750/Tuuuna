@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>Tuuuna</title>
-        <meta name="description" content="自由的言論平台">
+        <meta name="description" content="討論區">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" href="/images/fish.png">
         <link rel="stylesheet" type="text/css" href="/stylesheets/login.css">
@@ -27,6 +27,7 @@
                 getmemberData();
                 getBoardArticle();
                 richText();
+                scrollDetect();
             };
         </script>
     </head>
@@ -91,7 +92,7 @@
                 <!-- 工具欄 -->
                 <div id="tool-box">
                     <input type="text" placeholder="文章關鍵字" style="position: relative; bottom: 15px;">
-                    <img id="find" src="/images/find.png" onmouseover="find_g()" onmouseout="find_w()" style="position:relative;left:5px;bottom:2px;height:30px;width:30px;margin-right:10px;">
+                    <img id="find" src="/images/find.png" onclick="tryContent()" onmouseover="find_g()" onmouseout="find_w()" style="position:relative;left:5px;bottom:2px;height:30px;width:30px;margin-right:10px;">
                     <div style="display: inline-block;">
                         <div id="tool-post" onclick="openEditor()">發文</div>
                         <!-- <div id="tool-about">關於</div> -->
@@ -105,7 +106,14 @@
                 <input id="richtext-title" type="text" placeholder="標題" style="width:calc(100% - 22px); background: black;color:lightgray;border: lightgray 1px solid;-webkit-border-radius: 0px;border-radius: 0px; ">
                 <br><br>
                 <div id="editor"></div><br>
-                
+                <div id="image-size">
+                    <img id="image-size-image">
+                    <div style="position: fixed; top:15px; left:5px">
+                        <span id="image-big">放大</span>
+                        <span id="image-small">縮小</span>
+                        <span id="image-size-upload">上傳</span>
+                    </div> 
+                </div>
                 <div onclick="getContent()" id="post-button">發布</div>
                 <div onclick="openEditor()" id="giveup-button">放棄</div>
             </div>
