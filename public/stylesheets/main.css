@@ -65,7 +65,6 @@
 #content-list
 {
     padding: 0px;
-    list-style-type: none;
 }
 #content-list li
 {
@@ -75,6 +74,8 @@
 #content-list li:hover
 {
     background-color: lightgray;
+}
+#content-list li a:hover{
     color: black;
 }
 #richtext-box
@@ -134,9 +135,12 @@
 #message-tool-box
 {
     position: fixed;
+    padding: 5px 10px;
     bottom: 15px;
     right: 15px;
     background-color: black;
+    border-radius:4px;
+    -webkit-border-radius: 4px;
 }
 #image-size-upload
 {
@@ -183,4 +187,3 @@
     background-color: lightgray;
     color: black;
 }
-

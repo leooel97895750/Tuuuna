@@ -25,6 +25,10 @@ let getmessageRouter = require('./routes/getmessage');
 let insertboardRouter = require('./routes/insertboard');
 let opayRouter = require('./routes/opay');
 let opayretuenRouter = require('./routes/opayreturn');
+let updatenumberRouter = require('./routes/updatenumber');
+let updatenumber_freeRouter = require('./routes/updatenumber_free');
+let getmaRouter = require('./routes/getma');
+let insertMARouter = require('./routes/insertMA');
 
 let app = express();
 app.use(helmet());
@@ -59,6 +63,10 @@ app.use('/', getmessageRouter);
 app.use('/', insertboardRouter);
 app.use('/', opayRouter);
 app.use('/', opayretuenRouter);
+app.use('/', updatenumberRouter);
+app.use('/', updatenumber_freeRouter);
+app.use('/', getmaRouter);
+app.use('/', insertMARouter);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {

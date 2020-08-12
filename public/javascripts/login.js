@@ -56,7 +56,6 @@ function register()
         let getmailhash_url = "/api/getmailhash?mail_hash="+mail_hash;
         getAPI(getmailhash_url, function(xhttp){
             if(xhttp.responseText == 'authDenied') {alert('請重新登入');islogin = 0;}
-            else if(xhttp.responseText == 'sqlregex fail') {alert('資料包含特殊字元');}
             else
             {
                 let getmailhash_json = JSON.parse(xhttp.responseText);
@@ -101,7 +100,6 @@ function loginAPI(mail_hash, pwd_hash)
     let login_url = "/api/login?mailhash="+mail_hash+"&pwdhash="+pwd_hash;
     getAPI(login_url, function(xhttp){
         if(xhttp.responseText == 'authDenied') {alert('請重新登入');islogin = 0;}
-        else if(xhttp.responseText == 'sqlregex fail') {alert('資料包含特殊字元');}
         else if(xhttp.responseText == 'login fail') {alert('帳號密碼錯誤');}
         else
         {
@@ -120,7 +118,6 @@ function getmemberData()
     let getmember_url = "/api/getmember";
     getAPI(getmember_url, function(xhttp) {
         if(xhttp.responseText == 'authDenied') {islogin = 0;}
-        else if(xhttp.responseText == 'sqlregex fail') {alert('資料包含特殊字元');}
         else
         {
             islogin = 1;

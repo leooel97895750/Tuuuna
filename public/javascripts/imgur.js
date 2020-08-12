@@ -66,7 +66,6 @@ function uploadCutImg(htmlid, x, y)
                     let updatememberimg_url = "/api/updatememberimg?imgurl="+response_json.data.link+"&imgid="+response_json.data.id;
                     getAPI(updatememberimg_url, function(xhttp){
                         if(xhttp.responseText == 'authDenied') {alert('請重新登入');}
-                        else if(xhttp.responseText == 'sqlregex fail') {alert('資料包含特殊字元');}
                         else alert('上傳成功');
                         getmemberData();
                     }, getCookieByName('token'));

@@ -9,7 +9,6 @@ function richText()
                 container:
                     [['image', 'link'],
                     ['bold', 'italic', 'underline', 'strike'], // 粗體、斜體、底線和刪節線
-                    [{ 'size': ['small', false, 'large', 'huge'] }], // 文字大小
                     [{ 'header': [1, 2, 3, 4, 5, 6, false] }],// 標題
                     [{ 'color': [] }, { 'background': [] }], // 顏色
                     [{ 'list': 'ordered'}, { 'list': 'bullet' }], // 清單
@@ -132,8 +131,10 @@ function getContent()
 {
     //title varchar(1000)
     let title = $("#richtext-title").val();
+    title = textReplace(title);
     //txt text
     var txt = $('#editor .ql-editor').html();
+    txt = textReplace(txt);
     if(title == '')alert('要下標題喔');
     else if(txt == '<p><br></p>')alert('要寫內文喔');
     else
@@ -147,7 +148,6 @@ function getContent()
         let getmember_url = "/api/getmember";
         getAPI(getmember_url, function(xhttp) {
             if(xhttp.responseText == 'authDenied') {islogin = 0;alert('登入才能發文喔');}
-            else if(xhttp.responseText == 'sqlregex fail') {alert('資料包含特殊字元');}
             else
             {
                 let getmember_json = JSON.parse(xhttp.responseText);
@@ -161,11 +161,10 @@ function getContent()
                 let insertarticle_url = "/api/insertarticle";
                 postAPI(insertarticle_url, strArg, function(xhttp) {
                     if(xhttp.responseText == 'authDenied') {islogin = 0;}
-                    else if(xhttp.responseText == 'sqlregex fail') {alert('資料包含特殊字元');}
                     else
                     {
                         console.log(xhttp.responseText);
-                        getBoardArticle();
+                        getBoardArticleNext(0);
                         openEditor();
                         $("#richtext-title").val('');
                         $('#editor .ql-editor').html('');
@@ -180,4 +179,9 @@ function openEditor()
 {
     $("#richtext-box").toggle();
     $("#content-box").toggle();
+}
+//將字串內會出錯的字先自行url encode
+function textReplace(str)
+{
+    return str.replace(/\+/g, '%2B').replace(/\s/g, '&nbsp').replace(/\&/g, '%26');
 }

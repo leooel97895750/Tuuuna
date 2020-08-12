@@ -1,8 +1,9 @@
 require('dotenv').config();
 let mysql = require('mysql');
+//update帳號權限須包含update、select權限
 let pool = mysql.createPool({
   host : process.env.HOST,
-  user : process.env.USER_S,
+  user : process.env.USER_U,
   password : process.env.PASSWORD,
   database : process.env.DATABASE,
   multipleStatements: false
@@ -10,15 +11,16 @@ let pool = mysql.createPool({
 let express = require('express');
 let router = express.Router();
 
-//輸入CID 輸出member table資料
-router.get('/api/getarticlelist', function(req, res, next) {
+//更新觀看數值 +1
+router.post('/api/updatenumber_free', function(req, res, next) {
+
     //參數驗證(避免sql injection)
-    let p1 = req.query.cid;
-    let p2 = req.query.page;
+    let p1 = req.body.factorID;
+    
     pool.getConnection(function(err, connection){
         if(err){console.log(err); res.send('sql error');}
-        let myparams = [Number(p1), Number(p2)];
-        let querystr = "select a.AID, a.`Type`, a.Since, a.Author, a.Title, a.Good, a.Bad, a.`Share`, a.Message, a.Watch from class c, co, object o, article a where c.CID=? and c.CID=co.CID and co.OID=o.OID and o.OID=a.AID order by a.Since desc limit ?, 10";
+        let myparams = [Number(p1)];
+        let querystr = "update article set Watch = Watch + 1 where AID=?";
         connection.query(querystr, myparams, function(err, result){
             if(err){console.log(err); res.send('sql error');}
             res.send(result);
@@ -28,3 +30,4 @@ router.get('/api/getarticlelist', function(req, res, next) {
 });
 
 module.exports = router;
+

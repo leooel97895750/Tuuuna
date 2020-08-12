@@ -12,8 +12,8 @@ let router = express.Router();
 let jwt = require('jsonwebtoken');
 const secret = process.env.SECRET;
 
-//輸出member table資料
-router.get('/api/getmember', function(req, res, next) {
+//輸入MID 輸出member table資料
+router.get('/api/getma', function(req, res, next) {
 
     //jwt驗證(避免無權限者使用api)
     jwt.verify(req.headers['token'], secret, function(err, decoded){
@@ -22,11 +22,12 @@ router.get('/api/getmember', function(req, res, next) {
         {
             //參數驗證(避免sql injection)
             let p1 = decoded.mymid;
+            let p2 = req.query.aid;
             
             pool.getConnection(function(err, connection){
                 if(err){console.log(err); res.send('sql error');}
-                let myparams = [Number(p1)];
-                let querystr = "select MID, Name, CDes, Img, Mail, Since, LastModifyDT, Sex, Phone, Birthday, Address, FriendsNum, CID from `member` where MID=?";
+                let myparams = [Number(p1), Number(p2)];
+                let querystr = "select * from ma where MID=? and AID=?";
                 connection.query(querystr, myparams, function(err, result){
                     if(err){console.log(err); res.send('sql error');}
                     res.send(result);
@@ -38,4 +39,3 @@ router.get('/api/getmember', function(req, res, next) {
 });
 
 module.exports = router;
-

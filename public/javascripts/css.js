@@ -16,3 +16,15 @@ function find_g(){
 function find_w(){
     $("#find").attr("src", "/images/find.png");
 }
+function good_g(){
+    $("#good-img").attr("src", "/images/good_green.png");
+}
+function good_w(){
+    $("#good-img").attr("src", "/images/good.png");
+}
+function bad_g(){
+    $("#bad-img").attr("src", "/images/bad_green.png");
+}
+function bad_w(){
+    $("#bad-img").attr("src", "/images/bad.png");
+}
