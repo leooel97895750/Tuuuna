@@ -29,8 +29,22 @@ function imageHandler()
     //點擊quill toolbar中的image icon
     const input = document.createElement('input');
     input.setAttribute('type', 'file');
+    input.setAttribute('id', 'tmpinput');
     input.click();
-    input.onchange = () => {
+    try {
+        alert('正在上傳');
+        input.onchange = () => {    
+            base64ToUrl();
+        };
+    }
+    catch(e) {
+        console.log(e);
+        $("#tmpinput").on('change', function(){
+            base64ToUrl();
+        });
+    }
+    function base64ToUrl()
+    {
         //當載入圖片後，進行大小處理
         const inputimage = input.files[0];
         let reader = new FileReader();
@@ -50,13 +64,14 @@ function imageHandler()
             $("#image-size-image").css('height', myheight+'px');
         };
         img.src = _URL.createObjectURL(inputimage);
+
         //瀏覽器上顯示圖片
         reader.readAsDataURL(inputimage);
         reader.onload=function(e) {
             let imgFile = e.target.result;
             $("#image-size-image").attr('src', imgFile);
         }
-        
+
         $("#image-size").css('display', 'block');
         //綁定放大
         $("#image-big").on('click', function(ev){
@@ -87,7 +102,7 @@ function imageHandler()
             canvas.height = myheight;
             context.drawImage(img, 0, 0, Number(mywidth), Number(myheight));
             let canvasdata = canvas.toDataURL('image/jpeg');
-            
+
             let form = new FormData();
             form.append("image", canvasdata.replace('data:image/jpeg;base64,', ''));
             form.append("title", inputimage.name); 
@@ -113,12 +128,9 @@ function imageHandler()
                 $('#image-size-upload').off('click');
                 $("#image-big").off('click');
                 $("#image-small").off('click');
-            });
-                
-            
-        });    
-        
-    };
+            });   
+        });
+    }
 }
 //board.ejs專用函式，發文
 function tryContent()
@@ -134,7 +146,6 @@ function getContent()
     title = textReplace(title);
     //txt text
     var txt = $('#editor .ql-editor').html();
-    txt = textReplace(txt);
     if(title == '')alert('要下標題喔');
     else if(txt == '<p><br></p>')alert('要寫內文喔');
     else
@@ -164,6 +175,7 @@ function getContent()
                     else
                     {
                         console.log(xhttp.responseText);
+                        $("#content-list").empty();
                         getBoardArticleNext(0);
                         openEditor();
                         $("#richtext-title").val('');

@@ -4,31 +4,50 @@
     position: absolute;
     background-color: black;
     color: lightgray;
-    height: 100%;
     width: 100%;
 }
 #content-title
 {
     margin: 10px 0px;
 }
+#tool
+{
+    width: fit-content;
+    position: fixed;
+    right: 80px;
+    top: 20px;
+    padding: 6px;
+    font-size: 14px;
+    background-color: black;
+    color: #68e29f;
+    border: lightgray 2px solid;
+    border-radius:4px;
+    -webkit-border-radius: 4px;
+}
+#tool:hover{
+    color: black;
+    background-color: #4cc381;
+}
 #tool-box
 {
-    position: sticky;
-    top: 0px;
-    background-color: black;
+    display: none;
+    position: fixed;
+    top:70px;
+    right: 22px;
 }
-#tool-post
+.buttonstyle
 {
-    float: left;
     width: fit-content;
-    padding:5px;
-    margin:5px;
-    border: lightgray 1px solid;
+    border: lightgray 2px solid;
+    font-weight: bold;
+    margin: 10px;
+    padding:10px 15px;
+    background-color: black;
     color: #68e29f;
     border-radius:4px;
     -webkit-border-radius: 4px;
 }
-#tool-post:hover{
+.buttonstyle:hover{
     background-color: #4cc381;
     color: black;
 }
@@ -47,21 +66,6 @@
     background-color: #4cc381;
     color: black;
 }
-#tool-about
-{
-    float: left;
-    width: fit-content;
-    padding:5px;
-    margin:5px;
-    border: lightgray 1px solid;
-    color: lightgray;
-    border-radius:4px;
-    -webkit-border-radius: 4px;
-}
-#tool-about:hover{
-    background-color: lightgray;
-    color: black;
-}
 #content-list
 {
     padding: 0px;
@@ -73,6 +77,7 @@
 }
 #content-list li:hover
 {
+    color: black;
     background-color: lightgray;
 }
 #content-list li a:hover{
@@ -100,6 +105,7 @@
     width: fit-content;
     padding:5px 10px;
     margin:5px;
+    margin-left: 15px;
     border: lightgray 1px solid;
     color: #68e29f;
     border-radius:4px;

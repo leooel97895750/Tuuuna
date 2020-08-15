@@ -21,6 +21,7 @@
         <script src="/javascripts/content.js"></script>
         <script src="/javascripts/richtext.js"></script>
         <script src="/javascripts/css.js"></script>
+        <script src="/javascripts/toolbox.js"></script>
         <script>
             window.onload = function() {
                 getBoardTitle();
@@ -88,15 +89,17 @@
         <div id="content" boardcid=<%= boardcid %> style="z-index: 9;">
             <header>
                 <!-- 目錄位置 -->
-                <h2 id="content-title" onclick="window.location='https://www.tuuuna.com'">Tuuuna 討論區</h2>
+                <h2 id="content-title">Tuuuna 討論區</h2>
                 <!-- 工具欄 -->
-                <div id="tool-box">
-                    <input type="text" placeholder="文章關鍵字" style="position: relative; bottom: 15px;">
-                    <img id="find" src="/images/find.png" onclick="tryContent()" onmouseover="find_g()" onmouseout="find_w()" style="position:relative;left:5px;bottom:2px;height:30px;width:30px;margin-right:10px;">
-                    <div style="display: inline-block;">
-                        <div id="tool-post" onclick="openEditor()">發文</div>
-                        <!-- <div id="tool-about">關於</div> -->
-                    </div>   
+                <div id="tool" style="z-index: 12;" onclick="toolbox()">工具</div>
+                <div id="tool-box" style="z-index: 11;">
+                    <div class="buttonstyle" onclick="openEditor()"><img src="/images/write.png" style="width:15px;height:15px;margin-right:10px;"> 發文</div>
+                    <div class="buttonstyle" onclick="toolsearch()"><img src="/images/find.png" style="width:15px;height:15px;margin-right:10px;"> 搜尋</div>
+                    <div id="tool-search" style="display:none;">
+                        <input type="text" placeholder="文章關鍵字" style="position: relative; bottom: 15px;">
+                        <img id="find" src="/images/find.png" onclick="tryContent()" onmouseover="find_g()" onmouseout="find_w()" style="position:relative;left:5px;bottom:2px;height:30px;width:30px;margin-right:10px;">
+                    </div>
+                    <div class="buttonstyle"><img src="/images/elevator.png" style="width:15px;height:15px;margin-right:10px;"> 電梯</div>
                 </div>
             </header>
             
@@ -109,9 +112,9 @@
                 <div id="image-size">
                     <img id="image-size-image">
                     <div style="position: fixed; top:15px; left:5px">
-                        <span id="image-big">放大</span>
-                        <span id="image-small">縮小</span>
-                        <span id="image-size-upload">上傳</span>
+                        <span id="image-big" style="background-color: black;">放大</span>
+                        <span id="image-small" style="background-color: black;">縮小</span>
+                        <span id="image-size-upload" style="background-color: black;">上傳</span>
                     </div> 
                 </div>
                 <div onclick="getContent()" id="post-button">發布</div>

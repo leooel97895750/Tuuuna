@@ -30,7 +30,7 @@ function scrollDetect()
             var scrollTop = $(this).scrollTop();
             var scrollHeight = $(document).height();
             var windowHeight = $(this).height();
-            if(Math.abs((scrollTop + windowHeight) - scrollHeight) <= 10){
+            if(Math.abs((scrollTop + windowHeight) - scrollHeight) <= 15){
                 //鎖住滾輪偵測
                 scrollLock = 1;
                 nowPage = nowPage + 1;
@@ -85,7 +85,6 @@ function getBoardArticleNext(page)
 //紀錄文章列表位置
 function boardCookie()
 {
-    alert('www');
     console.log(nowPage);
     console.log(listNum);
 }
@@ -97,7 +96,7 @@ function getBoardTitle()
     getAPI(getclass_url, function(xhttp){
         let getclass_json = JSON.parse(xhttp.responseText);
         console.log(getclass_json);
-        $("#content-title").text("Tuuuna 討論區 >> "+getclass_json[0].CName);
+        $("#content-title").html("<a href='https://www.tuuuna.com'>Tuuuna 討論區</a> >> <a href='https://www.tuuuna.com/board/"+boardcid+"'>"+getclass_json[0].CName+"</a>");
     });
 }
 

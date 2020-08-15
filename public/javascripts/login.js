@@ -64,7 +64,7 @@ function register()
                 {
                     //2.2. server寄信至信箱驗證
                     //2.3. 信箱網址開通帳號並寫入資料庫
-                    alert('驗證信已寄至信箱\n請至信箱查看並開通帳號');
+                    alert('驗證信已寄至信箱\n請至信箱查看並開通帳號\n3~5分鐘');
                     let pwd_hash = hex_sha1(newpassword);
                     let sendmail_url = "/api/sendmail?gmail="+newmail+"&mail_hash="+mail_hash+"&pwd_hash="+pwd_hash+"&name="+newname;
                     getAPI(sendmail_url, function(xhttp){
